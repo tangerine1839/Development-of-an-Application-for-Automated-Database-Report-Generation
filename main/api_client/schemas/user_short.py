@@ -12,4 +12,4 @@ class UserShort(BaseModel):
     role: str
     permission_group: Optional[PermissionGroup] = None
     position: str
-    phone: str
+    phone: Optional[str] = None

@@ -26,25 +26,25 @@ from main.api_client.schemas.user_short import UserShort
 class InspectionShort(BaseModel):
     id: int
     public_id: int
-    status: str
-    date: str
-    deadline_at: datetime
-    started_at: datetime
+    status: Optional[str] = None
+    date: Optional[datetime] = None
+    deadline_at: Optional[datetime] = None
+    started_at: Optional[datetime] = None
     finished_at: Optional[datetime] = None
-    updated_at: datetime
-    stat_fails: int
-    stat_critical_fails: int
-    max_rate: int
-    fact_rate: int
-    place: Place
-    creator: UserShort
-    assignee: UserShort
-    pattern: PatternShort
-    force_complete: bool
-    blocked: bool
-    aborted: bool
-    guest_link: str
-    is_guest_inspection: bool
+    updated_at: Optional[datetime] = None
+    stat_fails: Optional[int] = None
+    stat_critical_fails: Optional[int] = None
+    max_rate: Optional[int] = None
+    factRate: Optional[int] = None
+    place: Optional[Place] = None
+    creator: Optional[UserShort] = None
+    assignee: Optional[UserShort] = None
+    pattern: Optional[PatternShort] = None
+    force_complete: Optional[bool] = None
+    blocked: Optional[bool] = None
+    aborted: Optional[bool] = None
+    guest_link: Optional[str] = None
+    is_guest_inspection: Optional[bool] = None
     guest_inspector: Optional[GuestInspector] = None
-    linear_filling: bool
-    deny_edit_answers: bool
+    linear_filling: Optional[bool] = None
+    deny_edit_answers: Optional[bool] = None

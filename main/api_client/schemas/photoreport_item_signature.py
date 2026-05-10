@@ -3,6 +3,8 @@ from typing import List, Optional
 from pydantic import BaseModel
 
 from main.api_client.schemas.geo import Geo
+from main.api_client.schemas.photoreport_item_trigger import PhotoreportItemTrigger
+from main.api_client.schemas.photoreport_photo import PhotoreportPhoto
 
 
 class PhotoreportItemSignature(BaseModel):

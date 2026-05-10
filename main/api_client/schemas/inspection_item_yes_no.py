@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional, List, Literal
 
 from pydantic import BaseModel
 
@@ -13,7 +13,8 @@ from main.api_client.schemas.inspection_item_video import InspectionItemVideo
 class InspectionItemYesNo(BaseModel):
     id: int
     name: str
-    type: str
+    type: Literal["YesNo"] = "YesNo"
+
     parent_id: int
     description: Optional[str] = None
     required: bool
@@ -23,14 +24,15 @@ class InspectionItemYesNo(BaseModel):
     audios: List[InspectionItemAudio] = []
     videos: List[InspectionItemVideo] = []
     example_photos: List[str] = []
-    geo: Geo
+    geo: Optional[Geo] = None
+
     geo_auto: bool
     value: Optional[str] = None
     show_by_trigger: bool
     text_yes: Optional[str] = None
     text_no: Optional[str] = None
     text_nothing: Optional[str] = None
-    fact_rate: int
+    factRate: int
     rate: int
     triggers: List[Trigger] = []
     is_violated: bool

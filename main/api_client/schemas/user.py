@@ -16,17 +16,17 @@ class User(BaseModel):
     name: str
     email: str
     role: str
-    permission_group: Optional[PermissionGroup] = None
+    permissionGroup: Optional[PermissionGroup] = None
     position: str
-    phone: str
-    zone1: Zone
-    zone2: Zone
-    zone3: Zone
-    places: List[Place] = []
-    places_groups: List[PlaceGroup] = []
-    notificable_places: List[Place] = []
-    notificable_patterns: List[PatternShort] = []
+    phone: Optional[str] = None
+    zone1: Optional[List[Zone]] = None
+    zone2: Optional[List[Zone]] = None
+    zone3: Optional[List[Zone]] = None
+    places: Optional[List[Place]] = None
+    placesGroups: List[PlaceGroup] = []
+    notificablePlaces: List[Place] = []
+    notificablePatterns: List[PatternShort] = []
     groups: List[UserGroup] = []
-    notificable_new_tasks_priorities: str
-    ldap_auth: bool
-    ldap_login: Optional[bool] = None
+    notificableNewTasksPriorities: Optional[List[str]] = None
+    ldapAuth: bool
+    ldapLogin: Optional[bool] = None

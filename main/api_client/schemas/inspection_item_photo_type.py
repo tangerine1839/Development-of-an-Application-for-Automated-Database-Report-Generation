@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional, List, Literal
 
 from pydantic import BaseModel
 
@@ -13,7 +13,8 @@ from main.api_client.schemas.inspection_item_video import InspectionItemVideo
 class InspectionItemPhotoType(BaseModel):
     id: int
     name: str
-    type: str
+    type: Literal["PhotoType"] = "PhotoType"
+
     parent_id: int
     description: Optional[str] = None
     required: bool
@@ -23,7 +24,8 @@ class InspectionItemPhotoType(BaseModel):
     audios: List[InspectionItemAudio] = []
     videos: List[InspectionItemVideo] = []
     example_photos: List[str] = []
-    geo: Geo
+    geo: Optional[Geo] = None
+
     geo_auto: bool
     show_by_trigger: bool
     triggers: List[Trigger] = []

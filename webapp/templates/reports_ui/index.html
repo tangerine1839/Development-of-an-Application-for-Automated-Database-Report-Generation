@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Выбор отчёта</title>
+    <style>
+        .logout-btn {
+            margin-top: 20px;
+            padding: 5px 10px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+        .messages {
+            margin-bottom: 20px;
+        }
+        .success {
+            color: green;
+            background-color: #d4edda;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .warning {
+            color: #856404;
+            background-color: #fff3cd;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .error {
+            color: red;
+            background-color: #f8d7da;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Выберите отчёт</h1>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="{% if message.tags %}{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <ul>
+        <li><a href="{% url 'reports_ui:report_task' %}">Отчёт по списку задач</a></li>
+        <li><a href="{% url 'reports_ui:report_object' %}">Отчёт по объектам</a></li>
+        <li><a href="{% url 'reports_ui:report_inspection' %}">Отчёт по проверкам</a></li>
+        <li><a href="{% url 'reports_ui:report_task_messages' %}">Отчёт по сообщениям задачи</a></li>
+        <li><a href="{% url 'reports_ui:report_inspection_items' %}">Отчёт по пунктам проверки</a></li>
+        <li><a href="{% url 'reports_ui:report_user' %}">Отчёт по списку пользователей</a></li>
+    </ul>
+
+    <form method="post" action="{% url 'reports_ui:logout_api' %}">
+        {% csrf_token %}
+        <button type="submit" class="logout-btn">Отключиться от API</button>
+    </form>
+</body>
+</html>

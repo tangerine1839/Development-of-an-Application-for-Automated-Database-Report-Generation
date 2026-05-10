@@ -1,7 +1,7 @@
 from datetime import datetime
-from typing import Optional, List, Union
+from typing import Optional, List, Union, Annotated
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from main.api_client.schemas.guest_inspector import GuestInspector
 from main.api_client.schemas.inspection_item_audio_type import InspectionItemAudioType
@@ -12,6 +12,7 @@ from main.api_client.schemas.inspection_item_information import InspectionItemIn
 from main.api_client.schemas.inspection_item_list_selector import InspectionItemListSelector
 from main.api_client.schemas.inspection_item_list_selector_multi import InspectionItemListSelectorMulti
 from main.api_client.schemas.inspection_item_numeric_value import InspectionItemNumericValue
+from main.api_client.schemas.inspection_item_photo_new import InspectionItemPhotoNew
 from main.api_client.schemas.inspection_item_photo_type import InspectionItemPhotoType
 from main.api_client.schemas.inspection_item_section import InspectionItemSection
 from main.api_client.schemas.inspection_item_signature import InspectionItemSignature
@@ -28,13 +29,13 @@ class Inspection(BaseModel):
     public_id: int
     status: str
     date: str
-    deadline_at: datetime
-    started_at: datetime
+    deadline_at: Optional[datetime] = None
+    started_at: Optional[datetime] = None
     finished_at: Optional[datetime] = None
-    updated_at: datetime
-    stat_fails: int
-    stat_critical_fails: int
-    max_rate: int
+    updated_at: Optional[datetime] = None
+    stat_fails: Optional[int] = None
+    stat_critical_fails: Optional[int] = None
+    max_rate: Optional[int] = None
     fact_rate: int
     place: Place
     creator: UserShort
@@ -48,7 +49,8 @@ class Inspection(BaseModel):
     guest_inspector: Optional[GuestInspector] = None
     linear_filling: bool
     deny_edit_answers: bool
-    items: List[Union[
+    items: List[Annotated[Union[
+        InspectionItemPhotoNew,
         InspectionItemSection,
         InspectionItemCategory,
         InspectionItemYesNo,
@@ -63,4 +65,5 @@ class Inspection(BaseModel):
         InspectionItemInformation,
         InspectionItemDateTime,
         InspectionItemListSelectorMulti
-    ]]
+    ],         Field(discriminator="type")
+]] = []

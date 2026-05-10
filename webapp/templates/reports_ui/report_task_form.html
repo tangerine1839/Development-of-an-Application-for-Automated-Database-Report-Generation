@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Параметры отчёта по задачам</title>
+</head>
+<body>
+    <h1>Отчёт по списку задач</h1>
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        {% if error_message %}
+    <div style="color: red; font-size: 14px; margin-bottom: 10px;">
+        <p>{{ error_message }}</p>
+    </div>
+{% endif %}
+
+        <p>{{ form.status.label_tag }}<br>{{ form.status }}</p>
+        <p>{{ form.creator_id.label_tag }}<br>{{ form.creator_id }}</p>
+        <p>{{ form.assignee_id.label_tag }}<br>{{ form.assignee_id}}</p>
+
+        <p>{{ form.created_at_from.label_tag }} {{ form.created_at_from }}</p>
+        <p>{{ form.created_at_to.label_tag }} {{ form.created_at_to }}</p>
+        <p>{{ form.finished_at_from.label_tag }} {{ form.finished_at_from }}</p>
+        <p>{{ form.finished_at_to.label_tag }} {{ form.finished_at_to }}</p>
+        <p>{{ form.excel_fields.label_tag }}<br>{{ form.excel_fields }}</p>
+
+        <button type="submit">Сформировать отчёт</button>
+    </form>
+    <a href="{% url 'reports_ui:index' %}">← Вернуться к списку отчётов</a>
+<script>
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', function() {
+            const errorDiv = document.querySelector('[style*="color: red"]');
+            if (errorDiv) {
+                errorDiv.style.display = 'none';
+            }
+        });
+    }
+</script>
+</body>
+</html>

@@ -15,7 +15,8 @@ class TaskShort(BaseModel):
     description: str
     creator: UserShort
     assignee: UserShort
-    priority: int
+    validator: Optional[UserShort] = None
+    priority: str
     created_at: datetime
     expire_at: datetime
     finished_at: Optional[datetime] = None
