@@ -15,19 +15,19 @@ STATUS_CHOICES = [
 
 class ReportInspectionForm(forms.Form):
     status = forms.MultipleChoiceField(
-        label="Статус инспекции",
+        label="Статус проверки",
         choices=STATUS_CHOICES,
         widget=forms.CheckboxSelectMultiple,
         required=False,
     )
 
     date_from = forms.DateTimeField(
-        label="Дата инспекции (от)",
+        label="Дата проверки (от)",
         widget=forms.DateTimeInput(attrs={"type": "datetime-local"}),
         required=False,
     )
     date_to = forms.DateTimeField(
-        label="Дата инспекции (до)",
+        label="Дата проверки (до)",
         widget=forms.DateTimeInput(attrs={"type": "datetime-local"}),
         required=False,
     )
@@ -54,7 +54,7 @@ class ReportInspectionForm(forms.Form):
     )
 
     is_guest = forms.BooleanField(
-        label="Только гостевые инспекции",
+        label="Только гостевые проверки",
         required=False,
         help_text="Если отмечено, будут показаны только гостевые инспекции.",
     )

@@ -2,44 +2,114 @@
 <html>
 <head>
     <title>Параметры отчёта по объектам</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            max-width: 500px;
+            margin: 20px 0;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"], select {
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #ffeeee;
+            border-left: 3px solid red;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        ul li {
+            margin-bottom: 5px;
+        }
+        ul li label {
+            font-weight: normal;
+            display: inline;
+        }
+        .help-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
     <h1>Отчёт по объектам</h1>
+
     <form method="post" novalidate>
         {% csrf_token %}
 
         {% if error_message %}
-    <div style="color: red; font-size: 14px; margin-bottom: 10px;">
-        <p>{{ error_message }}</p>
-    </div>
-{% endif %}
+            <div class="error-message">
+                <p>{{ error_message }}</p>
+            </div>
+        {% endif %}
 
-        <p>
-            {{ form.codes.label_tag }}
-            <br>
+        <div class="form-group">
+            <p>{{ form.codes.label_tag }}</p>
             {{ form.codes }}
-        </p>
-         <p>
-            {{ form.manager.label_tag }}
-            <br>
-            {{ form.manager }}
-        </p>
+        </div>
 
-        <p>
-            {{ form.excel_fields.label_tag }}
-            <br>
+        <div class="form-group">
+            <p>{{ form.manager.label_tag }}</p>
+            {{ form.manager }}
+        </div>
+
+        <div class="form-group">
+            <p>{{ form.excel_fields.label_tag }}</p>
             {{ form.excel_fields }}
-        </p>
+        </div>
 
         <button type="submit">Сформировать отчёт</button>
     </form>
+
     <a href="{% url 'reports_ui:index' %}">← Вернуться к списку отчётов</a>
 
     <script>
         const form = document.querySelector('form');
         if (form) {
             form.addEventListener('submit', function() {
-                const errorDiv = document.querySelector('[style*="color: red"]');
+                const errorDiv = document.querySelector('.error-message');
                 if (errorDiv) {
                     errorDiv.style.display = 'none';
                 }

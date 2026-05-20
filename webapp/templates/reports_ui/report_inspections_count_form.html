@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Отчёт по сообщениям задачи</title>
+    <title>Отчёт по количеству проверок</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -22,10 +22,22 @@
             font-weight: bold;
             margin-bottom: 5px;
         }
-        input[type="number"], input[type="text"], select {
+        input[type="date"], select {
             padding: 8px;
             width: 100%;
             box-sizing: border-box;
+        }
+        .radio-group {
+            margin-top: 5px;
+        }
+        .radio-group label {
+            display: inline;
+            font-weight: normal;
+            margin-right: 20px;
+        }
+        .radio-group input {
+            width: auto;
+            margin-right: 5px;
         }
         button {
             background-color: #4CAF50;
@@ -55,21 +67,10 @@
         a:hover {
             text-decoration: underline;
         }
-        ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        ul li {
-            margin-bottom: 5px;
-        }
-        ul li label {
-            font-weight: normal;
-            display: inline;
-        }
     </style>
 </head>
 <body>
-    <h1>Отчёт по сообщениям задачи</h1>
+    <h1>Отчёт по количеству проверок</h1>
 
     <form method="post" novalidate>
         {% csrf_token %}
@@ -80,14 +81,27 @@
             </div>
         {% endif %}
 
+
         <div class="form-group">
-            <p>{{ form.task_id.label_tag }}</p>
-            {{ form.task_id }}
+            <p>{{ form.grouping.label_tag }}</p>
+            <div class="radio-group">
+                {{ form.grouping }}
+            </div>
         </div>
 
         <div class="form-group">
-            <p>{{ form.extra_fields.label_tag }}</p>
-            {{ form.extra_fields }}
+            <p>{{ form.date_from.label_tag }}<br>{{ form.date_from }}</p>
+        </div>
+
+        <div class="form-group">
+            <p>{{ form.date_to.label_tag }}<br>{{ form.date_to }}</p>
+        </div>
+
+        <div class="form-group">
+            <p>{{ form.export_format.label_tag }}</p>
+            <div class="radio-group">
+                {{ form.export_format }}
+            </div>
         </div>
 
         <button type="submit">Сформировать отчёт</button>

@@ -8,9 +8,7 @@ from webapp.reports_ui.forms.api_key import ApiKeyForm
 
 
 def main_page(request):
-    """Страница ввода API ключа"""
 
-    # Если уже есть ключ в сессии, перенаправляем на страницу с отчетами
     if 'api_key' in request.session:
         return redirect('reports_ui:index')
 
@@ -19,16 +17,13 @@ def main_page(request):
         if form.is_valid():
             api_key = form.cleaned_data['api_key']
 
-            # Проверяем API ключ
             try:
                 with CheckOfficeAPIClient(
                         api_key=api_key,
                         base_url=settings.CHECK_OFFICE_BASE_URL,
                 ) as client:
-                    # Делаем простой запрос для проверки ключа
                     client.get_users(page=1, per_page=1)
 
-                    # Если успешно - сохраняем ключ в сессии
                     request.session['api_key'] = api_key
                     messages.success(request, "API ключ успешно подключен")
                     return redirect('reports_ui:index')
@@ -49,7 +44,6 @@ def main_page(request):
 
 
 def logout_api(request):
-    """Выход - удаление API ключа из сессии"""
     if 'api_key' in request.session:
         del request.session['api_key']
         messages.info(request, "Вы отключились от API")

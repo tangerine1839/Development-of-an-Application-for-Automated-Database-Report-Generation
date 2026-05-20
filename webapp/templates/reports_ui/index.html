@@ -57,6 +57,8 @@
         <li><a href="{% url 'reports_ui:report_task_messages' %}">Отчёт по сообщениям задачи</a></li>
         <li><a href="{% url 'reports_ui:report_inspection_items' %}">Отчёт по пунктам проверки</a></li>
         <li><a href="{% url 'reports_ui:report_user' %}">Отчёт по списку пользователей</a></li>
+        <li><a href="{% url 'reports_ui:inspections_count_form' %}">Отчёт по количеству проверок</a></li>
+        <li><a href="{% url 'reports_ui:users_inspections_count_form' %}">Отчёт по количеству проверок у пользователей</a></li>
     </ul>
 
     <form method="post" action="{% url 'reports_ui:logout_api' %}">

@@ -8,6 +8,7 @@ def index(request):
         ("inspections", "Отчет по проверкам"),
         ("task_messages", "Отчет по сообщениям задачи"),
         ("inspection_items", "Отчет по пунктам проверки"),
-        ("users", "Отчет по списку пользователей")
+        ("users", "Отчет по списку пользователей"),
+        ("inspections_count", "Отчет по количеству проверок")
     ]
     return render(request, "reports_ui/index.html", {"reports": reports})
